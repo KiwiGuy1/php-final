@@ -17,6 +17,7 @@ class CarModels extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
     public function add($data)
     {
         $stmt = $this->db->prepare('INSERT INTO cars (make, model, seller_id) VALUES (:make, :model, :seller_id)');

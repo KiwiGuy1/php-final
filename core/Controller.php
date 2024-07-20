@@ -27,5 +27,4 @@ class Controller
         return new $model();
     }
 }
-
 ?>

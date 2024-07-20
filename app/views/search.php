@@ -101,90 +101,35 @@
             <div class="clearfix"></div>
 
         </div><!-- /.top-area-->
-
-        <!--List Selections Start-->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="text-center">
-                        <h2>Check our selection of vehicles below</h2>
-                    </div>
-                </div>
+        <?php if (empty($cars)): ?>
+            <div class="empty-container">
+                <h2>No results found</h2>
             </div>
-        </div>
-        <!-- start form -->
-        <form action="index.php" method="GET">
-            <input type="hidden" name="url" value="car/search">
+        <?php else: ?>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="model-search-content">
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
-                                        <h2>Select Year</h2>
-                                        <div class="model-select-icon">
-                                            <select class="form-control" name="year">
-                                                <option value="">Any Year</option>
-                                                <?php foreach ($cars as $year) : ?>
-                                                    <option value="<?php echo $year['year']; ?>"><?php echo $year['year']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="single-model-search">
-                                        <h2>Model</h2>
-                                        <div class="model-select-icon">
-                                            <select class="form-control" name="model">
-                                                <option value="">Any Model</option>
-                                                <?php foreach ($cars as $model) : ?>
-                                                    <option value="<?php echo $model['model_name']; ?>"><?php echo $model['model_name']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
-                                        <h2>Select Make</h2>
-                                        <div class="model-select-icon">
-                                            <select class="form-control" name="make">
-                                                <option value="">Any Make</option>
-                                                <?php foreach ($cars as $car) : ?>
-                                                    <option value="<?php echo $car['manufacturer_name']; ?>"><?php echo $car['manufacturer_name']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
-                                        <h2>Select Price</h2>
-                                        <div class="model-select-icon">
-                                            <select class="form-control" name="price">
-                                                <option value="">Any Price</option>
-                                                <?php foreach ($cars as $price) : ?>
-                                                    <option value="<?php echo $price['price']; ?>"><?php echo number_format($price['price'], 2, '.', ','); ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-12">
-                                    <div class="single-model-search text-center">
-                                        <button type="submit" class="welcome-btn model-search-btn">
-                                            Search
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h2>Car Table</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cars as $car): ?>
+                            <tr>
+                                <td><?php echo $car['manufacturer_name']; ?></td>
+                                <td><?php echo $car['model_name']; ?></td>
+                                <td><?php echo $car['year']; ?></td>
+                                <td><?php echo '$' . number_format($car['price'], 2, ',', '.'); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
-        </form>
+        <?php endif; ?>
 
-        <?php include 'car.php'; ?>
         <!-- Include all js compiled plugins (below), or include individual files as needed -->
 
         <script src="assets/js/jquery.js"></script>
@@ -206,6 +151,6 @@
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
 
-    </body>
+</body>
 
 </html>
